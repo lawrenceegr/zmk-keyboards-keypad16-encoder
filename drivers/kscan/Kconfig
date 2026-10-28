@@ -9,3 +9,11 @@ config ZMK_KSCAN_GPIO_QDEC
 	  Enable kscan driver that consumes Zephyr's gpio-qdec input events
 	  and converts encoder rotations to key matrix events.
 	  This driver leverages Zephyr's built-in quadrature decoder.
+
+config ZMK_KSCAN_GPIO_QDEC_INIT_PRIORITY
+	int "GPIO QDEC KScan init priority"
+	default 91
+	depends on ZMK_KSCAN_GPIO_QDEC
+	help
+	  POST_KERNEL init priority. Must be higher than INPUT_INIT_PRIORITY so
+	  the gpio-qdec devices are ready when this driver checks them.

@@ -234,9 +234,11 @@ static const struct kscan_driver_api kscan_gpio_qdec_api = {
         .enabled = false,                                                        \
     };                                                                           \
                                                                                  \
-    /* Must init after gpio-qdec devices (APPLICATION level) */                 \
+    /* Must init after the gpio-qdec devices (POST_KERNEL,                     \
+     * CONFIG_INPUT_INIT_PRIORITY); devices can't use APPLICATION level. */     \
     DEVICE_DT_INST_DEFINE(inst, kscan_gpio_qdec_init, NULL, &data_##inst,       \
-                          &config_##inst, APPLICATION,                           \
-                          CONFIG_APPLICATION_INIT_PRIORITY, &kscan_gpio_qdec_api);
+                          &config_##inst, POST_KERNEL,                           \
+                          CONFIG_ZMK_KSCAN_GPIO_QDEC_INIT_PRIORITY,              \
+                          &kscan_gpio_qdec_api);
 
 DT_INST_FOREACH_STATUS_OKAY(KSCAN_GPIO_QDEC_INIT)
