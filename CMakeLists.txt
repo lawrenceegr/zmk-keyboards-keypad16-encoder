@@ -2,5 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 if(CONFIG_ZMK_KSCAN_GPIO_QDEC)
-  target_sources(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../drivers/kscan/kscan_gpio_qdec.c)
+  zephyr_library()
+  zephyr_include_directories(${APPLICATION_SOURCE_DIR}/include)
+  add_subdirectory(drivers)
 endif()

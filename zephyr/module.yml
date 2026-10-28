@@ -1,3 +1,7 @@
+name: zmk-keyboard-keypad16-encoder
 build:
+  cmake: .
+  kconfig: Kconfig
   settings:
     board_root: .
+    dts_root: .

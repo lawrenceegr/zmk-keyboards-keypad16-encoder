@@ -41,7 +41,7 @@ struct kscan_gpio_qdec_data {
 };
 
 /* Forward declaration for input callback */
-static void kscan_gpio_qdec_input_cb(struct input_event *evt);
+static void kscan_gpio_qdec_input_cb(struct input_event *evt, void *user_data);
 
 /* Static reference to the kscan device instance (supports single instance) */
 static const struct device *kscan_qdec_dev;
@@ -85,7 +85,7 @@ static int find_encoder_by_axis(const struct kscan_gpio_qdec_config *config,
  *   Col 0 = CW rotation (positive value)
  *   Col 1 = CCW rotation (negative value)
  */
-static void kscan_gpio_qdec_input_cb(struct input_event *evt)
+static void kscan_gpio_qdec_input_cb(struct input_event *evt, void *user_data)
 {
     const struct device *dev = kscan_qdec_dev;
     if (dev == NULL) {
@@ -129,7 +129,7 @@ static void kscan_gpio_qdec_input_cb(struct input_event *evt)
 }
 
 /* Register global input callback - will filter events in the callback */
-INPUT_CALLBACK_DEFINE(NULL, kscan_gpio_qdec_input_cb);
+INPUT_CALLBACK_DEFINE(NULL, kscan_gpio_qdec_input_cb, NULL);
 
 static int kscan_gpio_qdec_configure(const struct device *dev,
                                       kscan_callback_t callback)
